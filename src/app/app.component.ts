@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MEAN_Project';
+
+
+  allPost: Post[] = [];
+
+  onCreatePost(post: Post) {
+    console.log("new Post is : ", post);
+    this.allPost.push(post);
+  }
 }

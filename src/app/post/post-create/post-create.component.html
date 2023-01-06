@@ -1,8 +1,12 @@
 <mat-card>
   <mat-card-content>
     <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input [(ngModel)]="enteredTitle" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Post</mat-label>
-      <textarea [(ngModel)]="newPost" matInput></textarea>
+      <textarea [(ngModel)]="enteredPost" matInput></textarea>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="onAddPost()">Save Post</button>
   </mat-card-content>

@@ -1,6 +1,6 @@
 <app-toolbar></app-toolbar>
 
 <main>
-  <app-post-create></app-post-create>
-  <app-post-list></app-post-list>
+  <app-post-create (newPostEvent)="onCreatePost($event)"></app-post-create>
+  <app-post-list [inputPostList]="allPost"></app-post-list>
 </main>
