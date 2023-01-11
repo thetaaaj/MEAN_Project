@@ -7,13 +7,5 @@ import { Post } from './post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MEAN_Project';
 
-
-  allPost: Post[] = [];
-
-  onCreatePost(post: Post) {
-    console.log("new Post is : ", post);
-    this.allPost.push(post);
-  }
 }

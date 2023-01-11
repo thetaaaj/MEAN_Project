@@ -1,13 +1,22 @@
 <mat-card>
-  <mat-card-content>
-    <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input [(ngModel)]="enteredTitle" matInput>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Post</mat-label>
-      <textarea [(ngModel)]="enteredPost" matInput></textarea>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onAddPost()">Save Post</button>
-  </mat-card-content>
+  <form #postForm="ngForm" (submit)="onAddPost()">
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input ngModel name="title" matInput required #title="ngModel">
+        <mat-error *ngIf="!title.valid && title.touched">
+          Please enter a Title
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Post</mat-label>
+        <textarea ngModel name="content" matInput required #content="ngModel"></textarea>
+        <mat-error *ngIf="!content.valid  && content.touched">
+          Please enter a Post
+        </mat-error>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!postForm.valid">Save Post</button>
+    </mat-card-content>
+  </form>
 </mat-card>
