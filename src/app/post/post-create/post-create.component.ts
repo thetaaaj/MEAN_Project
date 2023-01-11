@@ -10,18 +10,17 @@ import { PostService } from 'src/app/post.service';
 })
 export class PostCreateComponent implements OnInit {
 
-  @ViewChild('postForm') postForm: NgForm;
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
   }
 
-  onAddPost() {
-    if (this.postForm.invalid) {
+  onAddPost(form: NgForm) {
+    if (form.invalid) {
       return;
     }
-    this.postService.onAddPost(this.postForm.value);
-
+    this.postService.onAddPost(form.value.title, form.value.content);
+    form.resetForm();
   }
 
 }

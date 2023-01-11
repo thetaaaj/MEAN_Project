@@ -17,10 +17,10 @@ export class PostService {
     return [...this.posts];
   }
 
-  onAddPost(newPost: Post) {
+  onAddPost(title, content) {
     const post: Post = {
-      title: newPost.title,
-      content: newPost.content
+      title: title,
+      content: content
     }
     this.posts.push(post);
     this.PostsUpdated.next([...this.posts]);

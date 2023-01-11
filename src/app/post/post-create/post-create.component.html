@@ -1,5 +1,5 @@
 <mat-card>
-  <form #postForm="ngForm" (submit)="onAddPost()">
+  <form #postForm="ngForm" (submit)="onAddPost(postForm)">
     <mat-card-content>
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
