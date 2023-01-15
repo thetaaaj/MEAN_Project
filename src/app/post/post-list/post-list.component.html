@@ -1,4 +1,4 @@
-<mat-accordion multi="true" *ngIf="posts.length>0">
+<mat-accordion multi="true" *ngIf="posts && posts.length > 0">
   <mat-expansion-panel *ngFor="let post of posts" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -13,6 +13,6 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<p class="info-text mat-body-1" *ngIf="posts.length<=0">
+<p class="info-text mat-body-1" *ngIf=" posts && posts.length == 0">
   No Post Available
 </p>
