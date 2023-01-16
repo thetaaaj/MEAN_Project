@@ -20,6 +20,7 @@ export class PostService {
   getPosts() {
     this.http.get<{ message: string, posts: Post[] }>(this.baseURL)
       .subscribe((postData) => {
+        console.log("post data : ", postData)
         this.posts = postData.posts;
         this.PostsUpdated.next([...this.posts]);
       })

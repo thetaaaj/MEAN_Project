@@ -1,10 +1,25 @@
 const express = require("express");
 
+const mongoose = require('mongoose');
+mongoose.connect("mongodb+srv://thetaaaj:9nNyy79GFMjKMasE@cluster0.qlx1xez.mongodb.net/node-angular?retryWrites=true&w=majority")
+  .then(()=>{
+    console.log("Connected to Mongo DB Successfully");
+  })
+  .catch(()=>{
+    console.log("Error occured while connecting");
+  })
+;
+
 const app = express();
 const bodyParser = require("body-parser");
 
+const Post = require('./models/post');
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
+
 
 app.use((req, res, next)=> {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,31 +36,31 @@ app.use((req, res, next)=> {
 
 
 app.post('/api/posts',(req,res,next)=>{
-  const post = req.body;
+  const post = new Post({
+    title : req.body.title,
+    content : req.body.content
+  });
   console.log(post);
+  post.save();
   res.status(201).json({
     message : 'Posts Added successfully'
   });
-  
+
 })
 
 app.get('/api/posts',(req, res, next) => {
-  const posts = [
-    {
-      id:'fwj123',
-      title:'First server side Post',
-      content:'This is the forst server side post recived from node backend !'
-    },
-    {
-      id:'dfw123',
-      title:'seconde server side Post',
-      content:'This is the secpond server side post recived from node backend !'
-    }
-  ]
-  return res.status(200).json({
-    message : 'Posts fetched successfully',
-    posts: posts
-  });
+  Post.find()
+    .then((documents)=>{
+      console.log("Documents : ",documents);
+      res.status(200).json({
+        message : 'Posts fetched successfully',
+        posts: documents
+      });
+    })
+    .catch(()=>{
+      console.log("Error Occured !");
+    })
+  
 });
 
 module.exports = app;
