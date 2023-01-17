@@ -54,7 +54,7 @@ export class PostService {
 
 
   deletePost(id: string) {
-    return this.http.delete(this.baseURL)
+    return this.http.delete(`${this.baseURL}/${id}`);
   }
 
   getPostUpdateListner() {
