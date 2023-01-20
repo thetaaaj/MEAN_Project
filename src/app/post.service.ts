@@ -36,6 +36,9 @@ export class PostService {
       })
   }
 
+  getPost(id: string) {
+    return { ...this.posts.find(p => p.id === id) };
+  }
 
   onAddPost(title, content) {
     const post: Post = {
@@ -46,13 +49,30 @@ export class PostService {
     this.http.post<{ message: string, postId: string }>(this.baseURL, post)
       .subscribe((responseData) => {
         const id = responseData.postId;
-        console.log("new Post id : ", id)
         post.id = id;
         this.posts.push(post);
         this.PostsUpdatedSubject.next([...this.posts]);
       });
 
   }
+
+  updatePost(id: string, title: string, content: string) {
+    const post: Post = {
+      id: id,
+      title: title,
+      content: content
+    }
+    this.http.put<{ message: string, postId: string }>(`${this.baseURL}/${id}`, post)
+      .subscribe((responseData) => {
+        const updatedPost = this.posts.find(post => {
+          return id === post.id;
+        });
+        console.log("updated Post : ", updatedPost);
+        this.PostsUpdatedSubject.next([...this.posts]);
+      });
+
+  }
+
 
 
   deletePost(id: string) {
