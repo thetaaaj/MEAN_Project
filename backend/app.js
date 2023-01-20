@@ -52,11 +52,11 @@ app.put("/api/posts/:id", (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-  Post.updateOne({ _id: req.params.id, post }).then((result) => {
-    console.log(result);
-    res.status(201).json({
-      message: "Posts Updated successfully",
-    });
+  Post.updateOne(
+    { _id: req.params.id },
+    { title: req.body.title, content: req.body.content }
+  ).then((result) => {
+    res.status(200).json({ message: "Post Updated successfully" });
   });
 });
 

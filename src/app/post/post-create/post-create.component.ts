@@ -13,6 +13,8 @@ export class PostCreateComponent implements OnInit {
 
   constructor(private postService: PostService, public route: ActivatedRoute) { }
 
+  enteredTitle = '';
+  enteredContent = '';
   mode = 'create';
   private postId: string;
   post: Post;
@@ -30,6 +32,7 @@ export class PostCreateComponent implements OnInit {
         else {
           this.mode = 'create';
           this.postId = null;
+          this.post = { title: '', content: '' };
         }
       });
   }
@@ -42,8 +45,8 @@ export class PostCreateComponent implements OnInit {
       this.postService.updatePost(this.postId, form.value.title, form.value.content);
     } else {
       this.postService.onAddPost(form.value.title, form.value.content);
-      form.resetForm();
     }
+    form.resetForm();
   }
 
 

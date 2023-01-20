@@ -64,11 +64,8 @@ export class PostService {
     }
     this.http.put<{ message: string, postId: string }>(`${this.baseURL}/${id}`, post)
       .subscribe((responseData) => {
-        const updatedPost = this.posts.find(post => {
-          return id === post.id;
-        });
-        console.log("updated Post : ", updatedPost);
-        this.PostsUpdatedSubject.next([...this.posts]);
+        console.log(responseData);
+        console.log("Post Updated SuccessFully ..");
       });
 
   }
