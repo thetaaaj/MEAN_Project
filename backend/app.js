@@ -48,7 +48,7 @@ app.post("/api/posts", (req, res, next) => {
 
 app.put("/api/posts/:id", (req, res, next) => {
   const post = new Post({
-    _id: req.params.id,
+    _id: req.body.id,
     title: req.body.title,
     content: req.body.content,
   });
