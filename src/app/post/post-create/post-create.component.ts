@@ -17,7 +17,7 @@ export class PostCreateComponent implements OnInit {
   enteredContent = '';
   mode = 'create';
   private postId: string;
-  post: Post;
+  post: any;
 
   @ViewChild('postForm') postForm: NgForm;
 
@@ -27,7 +27,11 @@ export class PostCreateComponent implements OnInit {
         if (paramMap.has('postId')) {
           this.mode = 'edit';
           this.postId = paramMap.get('postId');
-          this.post = this.postService.getPost(this.postId);
+          this.postService.getPost(this.postId)
+            .subscribe(response => {
+              console.log(response);
+              this.post = response.post;
+            });
         }
         else {
           this.mode = 'create';

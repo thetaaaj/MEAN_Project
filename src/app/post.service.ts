@@ -37,7 +37,7 @@ export class PostService {
   }
 
   getPost(id: string) {
-    return { ...this.posts.find(p => p.id === id) };
+    return this.http.get<any>(`${this.baseURL}/${id}`)
   }
 
   onAddPost(title, content) {
@@ -64,8 +64,11 @@ export class PostService {
     }
     this.http.put<{ message: string, postId: string }>(`${this.baseURL}/${id}`, post)
       .subscribe((responseData) => {
-        console.log(responseData);
-        console.log("Post Updated SuccessFully ..");
+        const updatedPost = [...this.posts];
+        const oldPostIndex = updatedPost.findIndex(p => p.id == post.id);
+        updatedPost[oldPostIndex] = post;
+        this.posts = updatedPost;
+        this.PostsUpdatedSubject.next([...this.posts]);
       });
 
   }

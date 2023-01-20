@@ -3,14 +3,14 @@
     <mat-card-content>
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <input [ngModel]="post.title" name="title" matInput required #title="ngModel">
+        <input [ngModel]="post?.title" name="title" matInput required #title="ngModel">
         <mat-error *ngIf="!title.valid && title.touched">
           Please enter a Title
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Post</mat-label>
-        <textarea [ngModel]="post.content" name="content" matInput required #content="ngModel"></textarea>
+        <textarea [ngModel]="post?.content" name="content" matInput required #content="ngModel"></textarea>
         <mat-error *ngIf="!content.valid  && content.touched">
           Please enter a Post
         </mat-error>
